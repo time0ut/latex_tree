@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 # TeX file generation
 
 # Source info file:
-source infos
+. ./infos
 
 FILE=${FILE}.tex
 
@@ -45,7 +45,7 @@ then
 " >> ${FILE}
 fi
 
-# Hypeirrefferences
+# Hyperrefferences
 echo "
 % Hyperrefferences  
 \usepackage{hyperref}
