@@ -78,11 +78,11 @@ echo "
 }
 " >> $FILE
 
-# Listings
-echo "
-% Listings
-\usepackage{minted}
-" >> $FILE
+## Listings
+#echo "
+#% Listings
+#\usepackage{minted}
+#" >> $FILE
 
 # Spacing
 echo "
