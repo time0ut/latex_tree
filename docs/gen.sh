@@ -26,14 +26,26 @@ if [ $CENC == "utf-8" ]
 then
     echo "
 % Unicode encoding  
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 " >> ${FILE}
     BADENC="latin1"
 else
     BADENC="utf-8"
 fi
 
-#Language setting
+# Colorfull Text
+echo "
+% Colorfull Text
+\usepackage{xcolor}
+" >> ${FILE}
+
+# €
+echo "
+% \euro
+\usepackage{eurosym}
+" >> ${FILE}
+
+# Language setting
 echo "
 % Language settings:
 \usepackage[$LANG]{babel}
@@ -44,6 +56,13 @@ then
 	echo "\usepackage[T1]{fontenc}
 " >> ${FILE}
 fi
+
+# Tables
+echo "
+% Tables
+\usepackage{array}
+\usepackage{longtable}
+" >> ${FILE}
 
 # Hyperrefferences
 echo "
@@ -91,26 +110,37 @@ echo "
 " >> $FILE
 
 # Headers and footers
+# bas-droite/basgauche: page
+# milieu: auteur+titre
 echo "
 % Headers and footers:
 \usepackage{fancyhdr}
 \pagestyle{fancy}
           \fancyhf{}
-          \fancyfoot[LE,RO]{\thepage}
+          \fancyfoot[LE,RO]{\textcolor[gray]{0.3}{\thepage}}
           % Rulers width
           \renewcommand{\footrulewidth}{$FRULE}
           \renewcommand{\headrulewidth}{$HRULE}
-\fancyhead[RO,RE]{$AUTHOR}
-\fancyfoot[LO,RE]{$TITLE}
+\fancyfoot[LO,RE]{\textcolor[gray]{0.3}{$AUTHOR}}
+\fancyfoot[CO,CE]{\textcolor[gray]{0.3}{$TITLE}}
 " >> ${FILE}
 
 # (Re)define stuff
 echo "
 % Vars & functs
+% Paths
 \newcommand\PIXPATH{$PIXPATH}
 \newcommand\SRCPATH{$SRCPATH}
+
+% Object:
+\newcommand\Object{$OBJECT}
+
+% End of line(forced):
+\newcommand\el{\hfill\\\}
+
+% Lists design:
 \renewcommand{\labelitemi}{$\diamond$}
-\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
 " >> ${FILE}
 
 # Begining of document
